@@ -3,7 +3,7 @@
 ## Required NPM Packages
 ```
 1. npm install express --save
-2. npm install cors morgan --save-dev
+2. npm install cors morgan --save
 3. npm nodemon --save-dev
 4. npm babel-cli babel-preset-env --save-dev
 5. npm concurrently --save
