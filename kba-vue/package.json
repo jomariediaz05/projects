@@ -1,26 +1,34 @@
 {
-  "name": "mevn-stack",
+  "name": "kba-vue",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "dev": "concurrently \"babel api --out-dir dist --watch\" \"nodemon dist/index.js\" "
   },
   "dependencies": {
-    "bootstrap": "^4.3.1",
+    "body-parser": "^1.19.0",
+    "concurrently": "^4.1.1",
     "core-js": "^2.6.5",
+    "express": "^4.17.1",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "cors": "^2.8.5",
+    "morgan": "^1.9.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.10.0",
     "@vue/cli-plugin-eslint": "^3.10.0",
     "@vue/cli-service": "^3.10.0",
+    "babel-cli": "^6.26.0",
     "babel-eslint": "^10.0.1",
+    "babel-preset-env": "^1.7.0",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "nodemon": "^1.19.1",
     "vue-template-compiler": "^2.6.10"
   }
 }
