@@ -5,11 +5,15 @@ import {
 import {
     registeredRoutes
 } from './routes/routes'
+import {
+    connectToDB
+} from './config/db';
 
 const app = express();
 const port = 7596;
 
 setEnvironment(app);
+connectToDB();
 registeredRoutes(app);
 
 app.get('/', (req, res) => {
