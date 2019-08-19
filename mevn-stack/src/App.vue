@@ -13,7 +13,10 @@ import NavBar from "./components/navigation/NavBar.vue";
 import FooterBar from "./components/navigation/FooterBar.vue";
 
 export default {
-  components: { NavBar, FooterBar }
+  components: { NavBar, FooterBar },
+  beforeCreate: function() {
+    this.$store.dispatch("authenticate");
+  }
 };
 </script>
 
@@ -76,5 +79,13 @@ footer#custom-footer {
 
 .btn-success:hover {
   background-color: #3da978;
+}
+
+form.custom-form {
+  max-width: 40rem;
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>
