@@ -16,14 +16,14 @@
 
 <script>
 export default {
-  name: "HomePage",
-  beforeCreate: function() {
-    fetch(`${this.$store.state.apiUrl}/api/user`, {
-      method: "GET"
-    })
-      // .then(res => res.json())
-      .then(res => console.log(res));
-  }
+  name: "HomePage"
+  // beforeCreate: function() {
+  //   fetch(`${this.$store.state.apiUrl}/user`, {
+  //     method: "GET"
+  //   })
+  //     // .then(res => res.json())
+  //     .then(res => console.log(res));
+  // }
 };
 </script>
 

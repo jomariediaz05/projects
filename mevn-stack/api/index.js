@@ -5,10 +5,14 @@ import {
 import {
     setEnvironment
 } from './config/env';
+import {
+    connectToDb
+} from './config/db';
 
 const app = express();
 
 setEnvironment(app);
+connectToDb();
 registeredRoutes(app);
 
 app.get('/', (req, res) => {
