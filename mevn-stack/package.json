@@ -4,12 +4,15 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "build": "set NODE_ENV=production && babel api --out-dir api-prod && vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "dev": "concurrently  \"set NODE_ENV=development\" \"babel api --out-dir api-prod --watch\" \"nodemon api-prod/index.js\" \"npm run serve\" "
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
     "core-js": "^2.6.5",
+    "express": "^4.17.1",
     "jquery": "^3.4.1",
     "popper.js": "^1.15.0",
     "vue": "^2.6.10",
@@ -20,9 +23,14 @@
     "@vue/cli-plugin-babel": "^3.10.0",
     "@vue/cli-plugin-eslint": "^3.10.0",
     "@vue/cli-service": "^3.10.0",
+    "babel-cli": "^6.26.0",
     "babel-eslint": "^10.0.1",
+    "babel-preset-env": "^1.7.0",
+    "concurrently": "^4.1.2",
+    "cors": "^2.8.5",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "morgan": "^1.9.1",
     "node-sass": "^4.12.0",
     "sass-loader": "^7.2.0",
     "vue-template-compiler": "^2.6.10"
