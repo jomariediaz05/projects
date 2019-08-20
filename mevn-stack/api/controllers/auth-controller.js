@@ -2,6 +2,9 @@ import {
     stringUtil
 } from '../utils/string-util';
 import userModel from '../models/user-model';
+import {
+    generateJWT
+} from '../services/auth-service';
 
 export function index(req, res) {
     const validation = validateIndex(req.body);
@@ -29,7 +32,10 @@ export function index(req, res) {
             return res.status(401).json();
         }
 
-        return res.json(200).json();
+        const token = generateJWT(user);
+        return res.status(200).json({
+            token: token
+        });
     })
 }
 

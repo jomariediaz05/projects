@@ -1,6 +1,7 @@
 import userModel from '../models//user-model';
 import taskModel from '../models/task-model';
 import moment from 'moment';
+import * as authService from '../services/auth-service';
 
 
 export function index(req, res) {
@@ -18,7 +19,7 @@ export function index(req, res) {
 
 export function create(req, res) {
 
-    const id = 10;
+    const id = authService.getUserId(req);
 
     userModel.findOne({
         _id: id
@@ -44,7 +45,7 @@ export function create(req, res) {
 }
 
 export function update(req, res) {
-    const id = 10;
+    const id = authService.getUserId(req);
 
     userModel.findOne({
         _id: id
@@ -57,7 +58,7 @@ export function update(req, res) {
             return res.status(400).json();
         }
 
-        const task = req.body.task;
+        const task = new taskModel(req.body.task);
 
         task.author = user._id;
         task.dueDate = moment(task.dueDate);
@@ -77,7 +78,7 @@ export function update(req, res) {
 }
 
 export function remove(req, res) {
-    const id = 5;
+    const id = authService.getUserId(req);
 
     taskModel.findOne({
         _id: req.params.id
@@ -92,7 +93,7 @@ export function remove(req, res) {
 
         if (task.author._id.toString() !== id) {
             return res.status(403).json({
-                message: 'Not allowed to delete another user\'s post'
+                message: 'Not allowed to delete another user\'s task'
             });
         }
 

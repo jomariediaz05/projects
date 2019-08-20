@@ -6,6 +6,7 @@ import TaskCreatePage from './components/tasks/TaskCreatePage.vue';
 import TaskEditPage from './components/tasks/TaskEditPage.vue';
 import RegisterPage from './components/authentication/RegisterPage.vue';
 import LoginPage from './components/authentication/LoginPage.vue';
+import * as authService from './services/auth-service';
 
 Vue.use(Router)
 
@@ -20,7 +21,14 @@ const routes = new Router({
     {
       path: '/tasks',
       name: 'tasks-all',
-      component: TaskAllPage,
+        component: TaskAllPage,
+        beforeEnter: function (to, from, next) {
+          if (authService.isLoggedIn()) {
+            next();
+          } else {
+            next('/login');
+          }
+        },
       children: [{
         path: 'new',
         name: 'tasks-new',
@@ -46,10 +54,8 @@ const routes = new Router({
   linkActiveClass: "active"
 });
 
-const isLoggedIn = false;
-
 routes.beforeEach((to, from, next) => {
-  if (!isLoggedIn) {
+  if (!authService.isLoggedIn()) {
     next();
   } else {
     next('/login');

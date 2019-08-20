@@ -71,7 +71,7 @@ export default {
       };
 
       const registerPromise = authService.registerUser(user);
-      const loginPromise = authService.login(user);
+      const loginPromise = authService.logIn(user);
 
       await Promise.all([registerPromise, loginPromise]);
 

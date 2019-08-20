@@ -18,10 +18,22 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav ml-auto">
-          <li v-for="(link, index) in links" :key="index" class="nav-item">
-            <router-link :to="link.url" class="nav-link" exact>{{ link.text }}</router-link>
-          </li>
           <li class="nav-item">
+            <router-link to="/" class="nav-link" exact>Home</router-link>
+          </li>
+          <li v-if="isLoggedIn" class="nav-item">
+            <router-link to="/tasks" class="nav-link" exact>Tasks</router-link>
+          </li>
+          <li v-if="!isLoggedIn" class="nav-item">
+            <router-link to="/register" class="nav-link" exact>Register</router-link>
+          </li>
+          <li v-if="!isLoggedIn" class="nav-item">
+            <router-link to="/login" class="nav-link" exact>Login</router-link>
+          </li>
+          <li v-if="isLoggedIn" class="nav-item">
+            <a href="#" @click.prevent="logOut" class="nav-link">Logout</a>
+          </li>
+          <li v-if="isLoggedIn" class="nav-item">
             <a
               href="#"
               class="nav-link"
@@ -34,8 +46,15 @@
 </template>
 
 <script>
+import * as authService from "../../services/auth-service";
+
 export default {
   name: "NavBar",
+  computed: {
+    isLoggedIn() {
+      return this.$store.state.isLoggedIn;
+    }
+  },
   data() {
     return {
       links: [
@@ -54,13 +73,15 @@ export default {
         {
           text: "Login",
           url: "/login"
-        },
-        {
-          text: "Logout",
-          url: "/"
         }
       ]
     };
+  },
+  methods: {
+    logOut: function() {
+      authService.logOut();
+      this.$router.push({ name: "home" });
+    }
   }
 };
 </script>
