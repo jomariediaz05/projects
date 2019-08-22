@@ -4,6 +4,11 @@ import morgan from 'morgan'
 import bodyParser from 'body-parser'
 
 export function setEnvironment (app) {
+  app.use(bodyParser.json())
+  app.use(bodyParser.urlencoded({
+    extended: false
+  }))
+
   if (process.env.NODE_ENV !== 'production') {
     setDevelopmentEnvironment(app)
   } else {
@@ -15,7 +20,6 @@ function setDevelopmentEnvironment (app) {
   process.env.NODE_ENV = 'development'
   process.env.DB_URL = 'mongodb://localhost:27017/venom-dev-db'
 
-  app.use(bodyParser.json())
   app.use(cors())
   app.use(morgan('dev'))
 }
@@ -24,6 +28,5 @@ function setProductionEnvironment (app) {
   process.env.NODE_ENV = 'production'
   process.env.DB_URL = 'mongodb://localhost:27017/venom-prod-db'
 
-  app.use(bodyParser.json())
   app.use(express.static(`${__dirname}/../dist`))
 }
