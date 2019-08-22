@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "start": "set NODE_ENV=production && node api-prod/index.js",
     "serve": "vue-cli-service serve",
     "build": "set NODE_ENV=production && babel api --out-dir api-prod && vue-cli-service build",
     "lint": "vue-cli-service lint",
@@ -13,6 +14,7 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
+    "bootstrap-vue": "^2.0.0-rc.28",
     "core-js": "^2.6.5",
     "express": "^4.17.1",
     "jquery": "^3.4.1",

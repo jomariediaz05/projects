@@ -21,23 +21,36 @@ const routes = new Router({
     {
       path: '/tasks',
       name: 'tasks-all',
-        component: TaskAllPage,
-        beforeEnter: function (to, from, next) {
-          if (authService.isLoggedIn()) {
-            next();
-          } else {
-            next('/login');
-          }
-        },
-      children: [{
-        path: 'new',
-        name: 'tasks-new',
-        component: TaskCreatePage
-      }, {
-        path: ':id',
-        name: 'tasks-edit',
-        component: TaskEditPage
-      }]
+      component: TaskAllPage,
+      beforeEnter: function (to, from, next) {
+        if (authService.isLoggedIn()) {
+          next();
+        } else {
+          next('/login');
+        }
+      }
+    }, {
+      path: '/tasks/new',
+      name: 'tasks-new',
+      component: TaskCreatePage,
+      beforeEnter: function (to, from, next) {
+        if (authService.isLoggedIn()) {
+          next();
+        } else {
+          next('/login');
+        }
+      }
+    }, {
+      path: '/tasks/:id',
+      name: 'tasks-edit',
+      component: TaskEditPage,
+      beforeEnter: function (to, from, next) {
+        if (authService.isLoggedIn()) {
+          next();
+        } else {
+          next('/login');
+        }
+      }
     }, {
       path: '/register',
       name: 'register',
@@ -52,15 +65,6 @@ const routes = new Router({
     }
   ],
   linkActiveClass: "active"
-});
-
-routes.beforeEach((to, from, next) => {
-  if (!authService.isLoggedIn()) {
-    next();
-  } else {
-    next('/login');
-  }
-
 });
 
 export default routes;

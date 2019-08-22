@@ -8,6 +8,7 @@ export function index(req, res) {
 
     taskModel.find({}, (error, tasks) => {
         if (error) {
+            console.log(res.status(500).json());
             return res.status(500).json();
         } else {
             return res.status(200).json({
@@ -15,6 +16,7 @@ export function index(req, res) {
             });
         }
     }).populate('author', 'username', 'user');
+
 }
 
 export function create(req, res) {
@@ -72,9 +74,7 @@ export function update(req, res) {
 
             return res.status(204).json();
         })
-    })
-
-    return res.status(204).json();
+    });
 }
 
 export function remove(req, res) {
@@ -106,9 +106,7 @@ export function remove(req, res) {
 
             return res.status(204).json();
         })
-    })
-
-    return res.status(204).json();
+    });
 }
 
 export function show(req, res) {
@@ -127,6 +125,4 @@ export function show(req, res) {
             task: task
         });
     });
-
-    return res.status(200).json();
 }

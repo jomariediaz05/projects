@@ -22,7 +22,7 @@
             <router-link to="/" class="nav-link" exact>Home</router-link>
           </li>
           <li v-if="isLoggedIn" class="nav-item">
-            <router-link to="/tasks" class="nav-link" exact>Tasks</router-link>
+            <router-link to="/tasks" class="nav-link">Tasks</router-link>
           </li>
           <li v-if="!isLoggedIn" class="nav-item">
             <router-link to="/register" class="nav-link" exact>Register</router-link>

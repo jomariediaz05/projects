@@ -88,4 +88,17 @@ form.custom-form {
   margin-left: auto;
   margin-right: auto;
 }
+
+.modal-title,
+.modal-body p {
+  color: #000 !important;
+}
+
+.late {
+  color: #dc3545;
+}
+
+.completed {
+  text-decoration: line-through;
+}
 </style>

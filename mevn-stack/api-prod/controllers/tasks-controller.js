@@ -33,6 +33,7 @@ function index(req, res) {
 
     _taskModel2.default.find({}, function (error, tasks) {
         if (error) {
+            console.log(res.status(500).json());
             return res.status(500).json();
         } else {
             return res.status(200).json({
@@ -98,8 +99,6 @@ function update(req, res) {
             return res.status(204).json();
         });
     });
-
-    return res.status(204).json();
 }
 
 function remove(req, res) {
@@ -132,8 +131,6 @@ function remove(req, res) {
             return res.status(204).json();
         });
     });
-
-    return res.status(204).json();
 }
 
 function show(req, res) {
@@ -152,6 +149,4 @@ function show(req, res) {
             task: task
         });
     });
-
-    return res.status(200).json();
 }

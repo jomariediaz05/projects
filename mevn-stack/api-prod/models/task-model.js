@@ -18,6 +18,10 @@ var taskSchema = new _mongoose2.default.Schema({
         default: Date.now
     },
     completed: {
+        type: Boolean,
+        default: false
+    },
+    author: {
         type: _mongoose2.default.Schema.Types.ObjectId,
         ref: 'user'
     }

@@ -13,7 +13,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function connectToDb() {
     _mongoose2.default.connect(process.env.DB_URL, {
-        useNewUrlParser: true
+        useNewUrlParser: true,
+        useFindAndModify: false
     }, function (error) {
         if (error) {
             console.log(error);

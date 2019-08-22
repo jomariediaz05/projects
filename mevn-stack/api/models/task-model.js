@@ -8,6 +8,10 @@ const taskSchema = new mongoose.Schema({
         default: Date.now
     },
     completed: {
+        type: Boolean,
+        default: false
+    },
+    author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
     }

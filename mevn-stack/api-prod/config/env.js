@@ -24,6 +24,8 @@ var _bodyParser2 = _interopRequireDefault(_bodyParser);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function setEnvironment(app) {
+    process.env.NODE_ENV = 'production';
+
     if (process.env.NODE_ENV !== 'production') {
         setDevelopmentEnvironment(app);
     } else {
@@ -43,9 +45,9 @@ function setDevelopmentEnvironment(app) {
 
 function setProductionEnvironment(app) {
     process.env.NODE_ENV = 'production';
-    process.env.DB_URL = 'mongodb://localhost:27017/prod-db';
+    process.env.DB_URL = 'mongodb+srv://user:p@ssw0rd@cluster0-zaidm.mongodb.net/test?retryWrites=true&w=majority';
     process.env.TOKEN_SECRET = 'api-production-ph1bra1nio';
 
     app.use(_bodyParser2.default.json());
-    app.use(_express2.default.static(__dirname + '/../dist'));
+    app.use(_express2.default.static(__dirname + '/../../dist'));
 }

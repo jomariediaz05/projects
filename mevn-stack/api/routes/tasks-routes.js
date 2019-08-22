@@ -8,6 +8,6 @@ router.post('/task', authService.requireLogin, taskController.create);
 router.get('/task', authService.requireLogin, taskController.index);
 router.get('/task/:id', authService.requireLogin, taskController.show);
 router.put('/task', authService.requireLogin, taskController.update);
-router.delete('/task', authService.requireLogin, taskController.remove);
+router.delete('/task/:id', authService.requireLogin, taskController.remove);
 
 export default router;
