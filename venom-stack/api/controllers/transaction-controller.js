@@ -1,19 +1,20 @@
-import TransactionModel from './transaction-controller'
+import mongoose from 'mongoose'
+import TransactionModel from '../models/transaction-model'
 
 export function getTransactionByYearAndMonth (req, res) {
-  //   const startDate = moment([req.params.year, req.params.month - 1])
-  //   const endDate = moment(startDate).endOf('month')
   const year = req.params.year
   const month = req.params.month - 1
+  const startDate = new Date(Date.UTC(year, month, 1, 0, 0, 0, 0))
+  const endDate = new Date(Date.UTC(year, month + 1, 1, 0, 0, 0, 0))
 
   TransactionModel.find({
     id: req.get('userId'),
     transactionDate: {
-      $gte: new Date(Date.UTC(year, month, 1, 0, 0, 0, 0)),
-      $le: new Date(Date.UTC(year, month + 1, 1, 0, 0, 0, 0))
+      $gte: startDate,
+      $lt: endDate
     }
   }).sort({
-    'transactionDate': 1
+    transactionDate: 1
   }).exec()
     .then(transaction => {
       if (!transaction) {
@@ -28,19 +29,22 @@ export function getTransactionByYearAndMonth (req, res) {
 }
 
 export function getRunningBalanceByYearAndMonth (req, res) {
+  const userId = req.get('userId')
   const year = req.params.year
   const month = req.params.month - 1
   const endDate = new Date(Date.UTC(year, month, 1))
 
-  TransactionModel.aggregate([{
+  const pipeLine = [{
     $match: {
-      userId: req.get('userId'),
+      userId: mongoose.Types.ObjectId(userId)
+    }
+  }, {
+    $match: {
       transactionDate: {
         $lt: endDate
       }
     }
-  },
-  {
+  }, {
     $group: {
       _id: null,
       charges: {
@@ -50,8 +54,9 @@ export function getRunningBalanceByYearAndMonth (req, res) {
         $sum: '$deposit'
       }
     }
-  }
-  ]).exec()
+  }]
+
+  TransactionModel.aggregate(pipeLine).exec()
     .then(transaction => {
       if (!transaction) {
         return res.status(400).json()

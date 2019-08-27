@@ -47,6 +47,7 @@ function setDevelopmentEnvironment(app) {
 function setProductionEnvironment(app) {
   process.env.NODE_ENV = 'production';
   process.env.DB_URL = 'mongodb://localhost:27017/venom-prod-db';
+  // process.env.DB_URL = 'mongodb+srv://venom:p@ssw0rd@personal-zaidm.mongodb.net/test?retryWrites=true&w=majority'
 
   app.use(_express2.default.static(__dirname + '/../dist'));
 }

@@ -19,7 +19,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 router.post('/transaction', transactionController.createTransaction);
-router.post('/transaction/:year/:month', transactionController.getTransactionByYearAndMonth);
-router.post('/transaction/balance/:year/:month', transactionController.getRunningBalanceByYearAndMonth);
+router.get('/transaction/:year/:month', transactionController.getTransactionByYearAndMonth);
+router.get('/transaction/balance/:year/:month', transactionController.getRunningBalanceByYearAndMonth);
 
 exports.default = router;

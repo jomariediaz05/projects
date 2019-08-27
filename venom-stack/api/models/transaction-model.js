@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const transactionSchema = mongoose.Schema({
+const transactionSchema = new mongoose.Schema({
   userId: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: 'user'

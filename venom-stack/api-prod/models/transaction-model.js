@@ -10,7 +10,7 @@ var _mongoose2 = _interopRequireDefault(_mongoose);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var transactionSchema = _mongoose2.default.Schema({
+var transactionSchema = new _mongoose2.default.Schema({
   userId: {
     type: _mongoose2.default.SchemaTypes.ObjectId,
     ref: 'user'

@@ -1,8 +1,16 @@
 import UserModel from '../models/user-model'
 
 export function getUsers (req, res) {
-  return res.status(200).json({
-    message: 'User Controller'
+  UserModel.find({}, (error, users) => {
+    if (error) {
+      return res.status(500).json(error)
+    }
+
+    if (!users) {
+      return res.status(400).json()
+    }
+
+    return res.status(200).json(users)
   })
 }
 

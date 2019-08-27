@@ -2,7 +2,8 @@ import mongoose from 'mongoose'
 
 export function connectToDb () {
   mongoose.connect(process.env.DB_URL, {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useFindAndModify: false
   }, error => {
     if (error) {
       console.log(error)
